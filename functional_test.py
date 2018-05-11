@@ -12,6 +12,7 @@ class NewVisitorTest(unittest.TestCase):
 		self.browser.quit()
 
 	def test_can_start_a_list_and_retrieve_it_later(self):
+
 		# John has heard about a cool website where he can find 
 		# past exams, samples and other usefull materials. He goes
 		# to check out it's homepage
@@ -30,17 +31,22 @@ class NewVisitorTest(unittest.TestCase):
 		)
 
 		# He types "Proiectare Logica" into a text box
-		inputbox.send_key('Proiectare logica')
+		inputbox.send_keys('Proiectare logica')
 
-		# When he hits enter, he is redirected to a new page
-		# that display search results for his query
-		inputbox.send_keys(Keys.Enter)
+		# When he hits enter, he is redirected to a search results page
+		inputbox.send_keys(Keys.ENTER)
 		time.sleep(1)
 
-		self.assertIn('Cursuri gasite', self.browser.title)
+		self.assertIn('Cautare cursuri', self.browser.title)
 
-		# The new page contains a search result that matches
-		# the course he wanted to find
+		# The search page contains the searched course and a search result
+		search_term = self.browser.find_element_by_id('queried_course')
+		self.assertIn('Proiectare logica', search_term.text)
+		
+		search_results = self.browser.find_element_by_class_name('search_result')
+		self.assertIn('Proiectare logica', search_results.text)
+	
+		# He clicks the first search result
 		self.fail('Finish the test!')
 
 if __name__ == '__main__':

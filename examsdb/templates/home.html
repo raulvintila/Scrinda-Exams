@@ -1,3 +1,12 @@
 <html>
+	<head>
 	<title>Resurse pentru examene</title>
+	</head>
+	<body>
+		<h1>Resurse pentru examene</h1>
+		<form method="GET" action="/search/">
+			<input name="course_search" id="home_course_search" placeholder="Introdu un curs pentru care vrei resurse">
+			{% csrf_token %}
+		</form>
+	</body>
 </html>
